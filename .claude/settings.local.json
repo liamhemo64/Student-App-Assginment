@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir /s \"C:\\\\Users\\\\Li-am Hemo\\\\Desktop\\\\app assignments\\\\StudentApp\\\\app\\\\src\\\\main\")",
+      "Bash(findstr:*)"
+    ]
+  }
+}
