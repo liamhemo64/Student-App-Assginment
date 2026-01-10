@@ -2,7 +2,6 @@ package com.idz.studentapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
@@ -50,14 +49,6 @@ class EditStudentActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonEditSave).setOnClickListener{saveEditedStudent()}
         findViewById<Button>(R.id.buttonDelete).setOnClickListener{deleteEditedStudent()}
         findViewById<Button>(R.id.buttonEditCancel).setOnClickListener{finish()}
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == android.R.id.home) {
-            onBackPressedDispatcher.onBackPressed()
-            return true
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun displayStudentDetails(student: Student) {
