@@ -2,12 +2,14 @@ package com.idz.studentapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.idz.studentapp.models.Model
@@ -33,6 +35,10 @@ class EditStudentActivity : AppCompatActivity() {
             insets
         }
 
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         studentNameEdit = findViewById(R.id.editTextEditName)
         studentIdEdit = findViewById(R.id.editTextEditID)
         studentPhoneNumberEdit = findViewById(R.id.editTextEditPhone)
@@ -47,6 +53,14 @@ class EditStudentActivity : AppCompatActivity() {
         findViewById<Button>(R.id.buttonEditSave).setOnClickListener{saveEditedStudent()}
         findViewById<Button>(R.id.buttonDelete).setOnClickListener{deleteEditedStudent()}
         findViewById<Button>(R.id.buttonEditCancel).setOnClickListener{finish()}
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressedDispatcher.onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun displayStudentDetails(student: Student) {
