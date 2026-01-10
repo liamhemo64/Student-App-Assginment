@@ -10,17 +10,22 @@ import androidx.recyclerview.widget.RecyclerView
 import com.idz.studentapp.R
 import com.idz.studentapp.models.Student
 
-class StudentListAdapter(
-    private val students: List<Student>,
-    private val onItemClick: (Student) -> Unit
-) : RecyclerView.Adapter<StudentListAdapter.StudentViewHolder>() {
+interface OnItemClickListener {
+    fun onItemClick(position: Int, student: Student?)
+}
 
-    class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageViewAvatar: ImageView = itemView.findViewById(R.id.imageViewAvatar)
-        val textViewStudentName: TextView = itemView.findViewById(R.id.textViewStudentName)
-        val textViewStudentID: TextView = itemView.findViewById(R.id.textViewStudentID)
-        val checkBoxStudent: CheckBox = itemView.findViewById(R.id.checkBoxStudent)
-    }
+class StudentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    val imageViewAvatar: ImageView = itemView.findViewById(R.id.imageViewAvatar)
+    val textViewStudentName: TextView = itemView.findViewById(R.id.textViewStudentName)
+    val textViewStudentID: TextView = itemView.findViewById(R.id.textViewStudentID)
+    val checkBoxStudent: CheckBox = itemView.findViewById(R.id.checkBoxStudent)
+}
+
+class StudentListAdapter(
+    private val students: List<Student>
+) : RecyclerView.Adapter<StudentViewHolder>() {
+
+    var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -40,7 +45,7 @@ class StudentListAdapter(
         }
 
         holder.itemView.setOnClickListener {
-            onItemClick(student)
+            listener?.onItemClick(position, student)
         }
     }
 

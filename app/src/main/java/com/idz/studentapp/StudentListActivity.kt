@@ -7,16 +7,18 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.idz.studentapp.adapters.OnItemClickListener
 import com.idz.studentapp.adapters.StudentListAdapter
+import com.idz.studentapp.adapters.StudentViewHolder
 import com.idz.studentapp.models.Model
+import com.idz.studentapp.models.Student
 
 class StudentListActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: StudentListAdapter
+    private var studentsList = Model.shared.students
+    private var adapter: RecyclerView.Adapter<StudentViewHolder> = StudentListAdapter(studentsList)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,15 +30,17 @@ class StudentListActivity : AppCompatActivity() {
             insets
         }
 
-        recyclerView = findViewById(R.id.recyclerViewStudents)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.setHasFixedSize(true)
-
-        adapter = StudentListAdapter(Model.shared.students) { student ->
-            val intent = Intent(this, StudentDetailsActivity::class.java)
-            intent.putExtra("student", student)
-            startActivity(intent)
+        (adapter as StudentListAdapter).listener = object : OnItemClickListener {
+            override fun onItemClick(position: Int, student: Student?) {
+                val intent = Intent(this@StudentListActivity, StudentDetailsActivity::class.java)
+                intent.putExtra("student", student)
+                intent.putExtra("position", position)
+                startActivity(intent)
+            }
         }
+
+        val recyclerView: RecyclerView = findViewById(R.id.recyclerViewStudents)
+        recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
 
         findViewById<FloatingActionButton>(R.id.fabAddStudent).setOnClickListener {
