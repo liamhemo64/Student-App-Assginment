@@ -35,10 +35,6 @@ class EditStudentActivity : AppCompatActivity() {
             insets
         }
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         studentNameEdit = findViewById(R.id.editTextEditName)
         studentIdEdit = findViewById(R.id.editTextEditID)
         studentPhoneNumberEdit = findViewById(R.id.editTextEditPhone)
@@ -50,6 +46,7 @@ class EditStudentActivity : AppCompatActivity() {
 
         student?.let{displayStudentDetails(it)}
 
+        findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener { finish() }
         findViewById<Button>(R.id.buttonEditSave).setOnClickListener{saveEditedStudent()}
         findViewById<Button>(R.id.buttonDelete).setOnClickListener{deleteEditedStudent()}
         findViewById<Button>(R.id.buttonEditCancel).setOnClickListener{finish()}

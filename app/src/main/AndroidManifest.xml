@@ -22,9 +22,7 @@
         </activity>
         <activity android:name=".StudentDetailsActivity" />
         <activity android:name=".NewStudentActivity" />
-        <activity
-            android:name=".EditStudentActivity"
-            android:parentActivityName=".StudentDetailsActivity"/>
+        <activity android:name=".EditStudentActivity"/>
     </application>
 
 </manifest>
