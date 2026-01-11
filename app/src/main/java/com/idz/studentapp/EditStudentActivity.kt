@@ -8,6 +8,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.idz.studentapp.models.Model
@@ -44,6 +45,7 @@ class EditStudentActivity : AppCompatActivity() {
 
         student?.let{displayStudentDetails(it)}
 
+        findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener { finish() }
         findViewById<Button>(R.id.buttonEditSave).setOnClickListener{saveEditedStudent()}
         findViewById<Button>(R.id.buttonDelete).setOnClickListener{deleteEditedStudent()}
         findViewById<Button>(R.id.buttonEditCancel).setOnClickListener{finish()}

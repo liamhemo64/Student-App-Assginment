@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.TextView
+import androidx.appcompat.widget.Toolbar
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -46,6 +47,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         // Check if student data is passed
         student?.let{displayStudentDetails(it)}
 
+        findViewById<Toolbar>(R.id.toolbar).setNavigationOnClickListener { finish() }
         findViewById<Button>(R.id.buttonEdit).setOnClickListener{
             val intent = Intent(this, EditStudentActivity::class.java)
             intent.putExtra("student", student)
